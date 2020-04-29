@@ -1,0 +1,45 @@
+.createCategory {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(180deg, #000, #3C027D);
+
+    .ccTitle {
+        display: flex;
+        justify-content: center;
+        padding: 5% 0;
+        h1 {
+            color: white;
+            font-family: $bebas;
+        }
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        label {
+            color: white;
+            margin: 3% 0;
+            font-family: $bebas;
+            font-size: 1.3em;
+        }
+        input {
+            width: 40%;
+            border: none;
+            border-radius: 5px;
+            height: 35px;
+        }
+
+        button {
+            margin: 5% 0;
+            border: none;
+            background: navy;
+            color: white;
+            height: 35px;
+            font-family: $bebas;
+            border-radius: 5px;
+            font-size: 1.3em;
+            width: 30%;
+        }
+    }
+}

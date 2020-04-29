@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <%- include('header.ejs') %>
+    </head>
+    <div class='createCategory'>
+        <div class='ccTitle'>
+            <h1>Create Category</h1>
+        </div>
+        <form method='POST' action=''>
+            <label>Category Name:</label>
+            <input type='text' name='title' placeholder='Category Name' required />
+            <label>Category Description:</label>
+            <input type='text' name='description' placeholder='Description' required />
+            <button>Submit</button>
+        </form>
+    </div>
+</html>

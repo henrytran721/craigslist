@@ -4,8 +4,48 @@
     </head>
     <body>
         <% if(user) { %>
-            <div class='homeContainer'>
-                <h1 class='userHomepage'>Hello, <%= user.first_name + ' ' + user.last_name %></h1>
+            <div class='loggedInContainer'>
+                <div class='lIHeader'>
+                    <h1 class='userHomepage'>Hello, <%= user.first_name + ' ' + user.last_name %></h1>
+                    <% if(user.isAdmin) { %>
+                        <p>User Status: Admin</p>
+                    <% } else { %>
+                        <p>User Status: General User</p>
+                    <% } %>
+                    <div class='hpLogo'>
+                        <img src='https://i.imgur.com/44xTMJR.png' />
+                        <a href='/logout'>Log Out</a>
+                    </div>
+                </div>
+                <div class='lIMenu'>
+                    <ul>
+                        <a href='/yourlistings'><li>Your Listings</li></a>
+                        <a href='/createpost'><li>Create A Post</li></a>
+                        <a href='/categories'><li>Categories</li></a>
+                        <% if(!user.isAdmin) { %>
+                            <a href='/adminaccess'><li>Admin Access</li></a>
+                        <% } else { %>
+                            <a href='/createcategory'><li>Create Category</li></a>
+                        <% } %>
+                    </ul>
+                </div>
+                <div class='allPosts'>
+                    <ul>
+                        <% for(let i = 0; i < posts.length; i++) {%>
+                            <a class='homePostCard' href='/<%= posts[i]._id %>'><li>
+                                <img src=<%= posts[i].image %> />
+                                <div class='cardInfo'>
+                                    <h3><%= posts[i].title %></h3>
+                                    <p><%= posts[i].price %></p>
+                                </div>
+                                <div class='cardUserInfo'>
+                                    <p><%= posts[i].username.username %></p>
+                                    <p><%= posts[i].date.toDateString() %></p>
+                                </div>
+                            </li></a>
+                        <% } %>
+                    </ul>
+                </div>
             </div>
         <% } else { %>
         <div class='homeContainer'>

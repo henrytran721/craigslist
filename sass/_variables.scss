@@ -1,3 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&display=swap');
 
+@mixin main-button {
+    margin: 2% 0;
+    border: none;
+    background: navy;
+    color: white;
+    height: 35px;
+    font-family: $bebas;
+    border-radius: 5px;
+    font-size: 1.3em;
+    width: 30%;
+}

@@ -1,0 +1,56 @@
+.createPostContainer {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(180deg, #000, #3C027D);
+    overflow: hidden;
+
+    .cPtitle {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        h1 {
+            color: white;
+            font-family: $bebas;
+            padding: 5% 0;
+            font-size: 2.5em;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        color: white;
+        justify-content: center;
+        align-items: center;
+
+        label {
+            margin: 1% 0;
+            font-family: $bebas;
+            font-size: 1.3em;
+        }
+
+        input, select {
+            width: 40%;
+            height: 35px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        select {
+            background: #fff;
+            border: none;
+        }
+
+        button {
+            margin: 2% 0;
+            border: none;
+            background: navy;
+            color: white;
+            height: 35px;
+            font-family: $bebas;
+            border-radius: 5px;
+            font-size: 1.3em;
+            width: 30%;
+        }
+    }
+}

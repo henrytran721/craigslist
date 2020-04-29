@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <%- include('header.ejs') %>
+    </head>
+    <body>
+        <div class='adminAccessContainer'>
+            <div class='aHeader'>
+                <h1>Enter Admin Password</h1>
+                <p>By entering the correct admin access password, you will have access to special features such as creating categories.</p>
+            </div>
+            <form method='POST' action=''>
+                <label>Please Enter Admin Password</label>
+                <input type='password' name='adminPass' placeholder='Enter Admin Password' />
+                <label>Please Enter Re-enter <strong>Your</strong> Password</label>
+                <input type='password' name='password' placeholder='Enter Your Password' />
+                <button>Submit</button>
+            </form>
+        </div>
+    </body>
+</html>

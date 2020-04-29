@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <%- include('header.ejs') %>
+    </head>
+    <body>
+        <div class='createPostContainer'>
+            <div class='cPtitle'>
+                <h1>
+                    Create A Post
+                </h1>
+            </div>
+            <form method='POST' action=''>
+                <label>Title</label>
+                <input type='text' name='title' placeholder='Title' />
+                <label>Description</label>
+                <input type='text' name='description' placeholder='Description' />
+                <label>Image URL</label>
+                <input type='text' name='image' placeholder='Please enter the url of your image' />
+                <label>Price</label>
+                <input type='text' name='price' placeholder='Please enter desired price listing' />
+                <label>
+                    Select A Category
+                </label>
+                <select name='category'>
+                    <% for(let i = 0; i < categories.length; i++) { %>
+                        <option value=<%= categories[i]._id %>><%= categories[i].category %></option>
+                    <% } %>
+                </select>
+                <button>Submit</button>
+            </form>
+        </div>
+    </body>
+</html>

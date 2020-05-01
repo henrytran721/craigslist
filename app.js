@@ -9,7 +9,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 const async = require('async');
 const moment = require('moment');
-const { body,validationResult } = require('express-validator/');
+const { body, validationResult, sanitizeBody } = require('express-validator');
 
 const dev_db_url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-gevd4.azure.mongodb.net/craigslist?retryWrites=true&w=majority`
 const mongoDb = process.env.MONGODB_URI || dev_db_url;
@@ -25,7 +25,9 @@ const User = mongoose.model(
         last_name: {type: String, required: true, min: 1},
         username: {type: String, required: true, unique: true},
         password: {type: String, required: true},
-        isAdmin: {type: Boolean}
+        isAdmin: {type: Boolean},
+        email: {type: String, required: true},
+        phone_num: {type: String, required: true}
     }
 )
 
@@ -47,6 +49,7 @@ const Category = mongoose.model(
     {
         category: {type: String, required: true, min: 1},
         description: {type: String, required: true, min: 1},
+        image: {type: String, required: true, min: 1}
     }
 )
 
@@ -129,6 +132,7 @@ app.get('/signup', (req, res) => {
 
 // signup post
 app.post('/signup', (req, res, next) => {
+    // validate fields 
     bcrypt.hash(req.body.password, 10, (err, hashed) => {
         if(err) {return next(err)}
         else {
@@ -137,7 +141,9 @@ app.post('/signup', (req, res, next) => {
                     first_name: req.body.first_name,
                     last_name: req.body.last_name,
                     username: req.body.username,
-                    password: hashed
+                    password: hashed,
+                    email: req.body.email,
+                    phone_num: req.body.phone_num
                 }
             )
             User.findOne({username: req.body.username}, (err, example) => {
@@ -186,7 +192,7 @@ app.post('/createpost', (req, res, next) => {
         if(err) {
             return next(err);
         } else {
-            res.redirect('/' + post._id);
+            res.redirect('/post/' + post._id);
         }
     })
     }
@@ -199,7 +205,8 @@ app.post('/createcategory', (req, res, next) => {
     const category = new Category(
         {
             category: req.body.title,
-            description: req.body.description
+            description: req.body.description,
+            image: req.body.image
         }
     )
     Category.findOne({category: req.body.title}, (err, duplicate) => {
@@ -254,6 +261,104 @@ app.post('/adminaccess', (req, res, next) => {
     } else {
         res.redirect('/adminaccess');
     }
+})
+
+// post detail
+app.get('/post/:id', (req, res, next) => {
+    async.parallel({
+        post: function(callback) {
+            Post.findById(req.params.id)
+                .populate('username')
+                .populate('category')
+                .exec(callback)
+        }
+    }, function(err, results) {
+        if(err) {
+            return next(err)
+        } else {
+            res.render('./views/post_detail', {user: req.user, post: results.post})
+        }
+    })
+})
+
+// update post
+app.get('/update/:id', (req, res) => {
+    // get category and post info based on id
+    async.parallel(
+        {
+            post: function(callback) {
+                Post.findById(req.params.id)
+                    .populate('category')
+                    .populate('username')
+                    .exec(callback)
+            },
+            category: function(callback) {
+                Category.find({})
+                    .exec(callback)
+            }
+        }, function(err, results) {
+            //res.send(results);
+            res.render('./views/update_post_form.ejs', {post: results.post, categories: results.category})
+        }
+    )
+})
+
+app.post('/update/:id', (req, res, next) => {
+    const post = new Post(
+        {
+            title: req.body.title,
+            description: req.body.description,
+            image: req.body.image,
+            category: req.body.category,
+            price: req.body.price,
+            username: req.user,
+            _id: req.params.id
+        }
+    )
+
+    Post.findByIdAndUpdate(req.params.id, post, {}, function(err) {
+        if(err) {
+            return next(err);
+        } else {
+            res.redirect('/post/' + req.params.id);
+        }
+    })
+})
+
+// categories page
+app.get('/categories', (req, res, next) => {
+    async.parallel({
+        categories: function(callback) {
+            Category.find({})
+                .exec(callback);
+        }
+    }, function(err, results) {
+        if(err) {
+            return next(err);
+        } else {
+            res.render('./views/categories', {user: req.user, categories: results.categories});
+        }
+    }
+    )
+})
+
+app.get('/categories/:id', (req, res, next) => {
+    async.parallel(
+        {
+            post: function(callback) {
+                Post.find({'category': req.params.id})
+                    .populate('category')
+                    .populate('username')
+                    .exec(callback)
+            }
+        }, function(err, results) {
+            if(err) {
+                return next(err);
+            } else {
+                res.render('./views/category_detail', {user: req.user, post: results.post})
+            }
+        }
+    )
 })
 
 app.listen(3030, () => {

@@ -32,17 +32,22 @@
                 <div class='allPosts'>
                     <ul>
                         <% for(let i = 0; i < posts.length; i++) {%>
-                            <a class='homePostCard' href='/<%= posts[i]._id %>'><li>
-                                <img src=<%= posts[i].image %> />
-                                <div class='cardInfo'>
-                                    <h3><%= posts[i].title %></h3>
-                                    <p><%= posts[i].price %></p>
-                                </div>
-                                <div class='cardUserInfo'>
-                                    <p><%= posts[i].username.username %></p>
-                                    <p><%= posts[i].date.toDateString() %></p>
-                                </div>
-                            </li></a>
+                                <li class='homePostCard'>
+                                    <a href='/post/<%= posts[i]._id %>'>
+                                    <img src=<%= posts[i].image %> />
+                                    <div class='cardInfo'>
+                                        <h3><%= posts[i].title %></h3>
+                                        <p><%= posts[i].price %></p>
+                                        <% if(user.username === posts[i].username.username) {%>
+                                            <a class='updateBtn' href='<%= /update/ + posts[i]._id %>'>Update</a>
+                                        <% } %>
+                                    </div>
+                                    <div class='cardUserInfo'>
+                                        <p><%= posts[i].username.username %></p>
+                                        <p><%= posts[i].date.toDateString() %></p>
+                                    </div>
+                                    </a>
+                                </li>
                         <% } %>
                     </ul>
                 </div>

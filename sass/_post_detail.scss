@@ -1,0 +1,35 @@
+.postDetailContainer {
+    display: flex;
+    width: 100%;
+
+    .pdImage {
+        margin: 0 3%;
+        
+        img {
+            width: 70%;
+        }
+    }
+
+    .postDetail {
+        color: white;
+        font-family: $bebas;
+        h1 {
+            margin: 0;
+        }
+
+        p {
+            font-family: $openSans;
+        }
+    }
+}
+
+.updateBtn {
+    background: #fff;
+    padding: 2% 5%;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.phone_num {
+    margin: 0 0 5% 0;
+}

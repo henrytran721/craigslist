@@ -22,7 +22,15 @@
                 </div>
                 <div>
                     <label>Password</label>
-                    <input type='password' name='password' placeholder='Password' required />
+                    <input type='password' name='password' placeholder='Password' minlength='5' required />
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type='email' name='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" size="30" placeholder='Please enter an email address' required />
+                </div>
+                <div>
+                    <label>Phone Number</label>
+                    <input type='tel' name='phone_num' pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder='Please enter a phone number (Format: ###-###-####)' required />
                 </div>
                 <button>Submit</button>
             </form>

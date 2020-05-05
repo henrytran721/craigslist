@@ -23,7 +23,7 @@ Tools used:
  
  Login 
  
- For the login page, I used Passport.js' LocalStrategy class which searches the database and verifies the username and password (with bcrypt unserialize). Once verification has succeeded, the user's info is serialized into a session cookie and deserialized to be stored in the user's browser.
+ For the login page, I used Passport.js' LocalStrategy class which searches the database and verifies the username and password (with bcrypt unserialize). Once verification has succeeded, the user's info is serialized into a session cookie and deserialized to be stored in the user's browser. I also set the session parameter `maxAge` to 3600000 so that the session will expire in 1 hour and prevent users from having to sign back in every couple of minutes. 
  
  ## Admin and General User Status
  

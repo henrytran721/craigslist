@@ -14,7 +14,11 @@
                 </div>
             </div>
             <div class='categoryHeader'>
+                <% if(post[0]) { %>
                 <h1><%= post[0].category.category %></h1>
+                <% } else { %>
+                <h1>This category does not have any products, please add a product and try again.</h1>
+                <% } %>
             </div>
             <div class='categoryList'>
                 <ul>

@@ -19,7 +19,7 @@
                 </div>
                 <div class='lIMenu'>
                     <ul>
-                        <a href='/yourlistings'><li>Your Listings</li></a>
+                        <a href='/yourlistings/<%= user._id %>'><li>Your Listings</li></a>
                         <a href='/createpost'><li>Create A Post</li></a>
                         <a href='/categories'><li>Categories</li></a>
                         <% if(!user.isAdmin) { %>

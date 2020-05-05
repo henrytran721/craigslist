@@ -193,11 +193,12 @@ $openSans: 'Open Sans', sans-serif;
     ul {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
         padding: 0 3%;
 
         li {
             list-style: none;
+            flex-basis: 20%;
+            margin: 2% 5%;
         }
     }
 

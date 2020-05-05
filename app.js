@@ -361,6 +361,24 @@ app.get('/categories/:id', (req, res, next) => {
     )
 })
 
-app.listen(3030, () => {
-    console.log(`app is listening at port 3000`);
+app.get('/yourlistings/:id', (req, res, next) => {
+    async.parallel({
+        posts: function(callback) {
+            Post.find({'username': req.params.id})
+            .populate('category')
+            .populate('username')
+            .exec(callback)
+        }
+    }, function(err, results) {
+        if(err) {
+            return next(err);
+        } else {
+            res.render('./views/yourlistings', {user: req.user, post: results.posts})
+        }
+    }
+    )
+})
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`app is listening at port ${process.env.PORT}`);
 })

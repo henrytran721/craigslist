@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <%- include('header.ejs') %>
+    </head>
+    <body>
+        <% if(user) { %>
+            <div class='categoryContainer'>
+            <div class='loggedInContainer'>
+                <div class='lIHeader'>
+                    <h1 class='userHomepage'>Hello, <%= user.first_name + ' ' + user.last_name %></h1>
+                    <div class='hpLogo'>
+                        <a href='/'><img src='https://i.imgur.com/44xTMJR.png' /></a>
+                        <a href='/logout'>Log Out</a>
+                    </div>
+                </div>
+            </div>
+                <div class='yourList'>
+                    <h1>Your Listings</h1>
+                    <ul>
+                    <% for(let i = 0; i < post.length; i++) { console.log(post[i]) %>
+                        <a class='categoryPostCard' href='/post/<%= post[i]._id%>'>
+                            <li>
+                                <div class='categoryImage'>
+                                    <img src=<%= post[i].image %> />
+                                </div>
+                                <div class='categoryInfo'>
+                                    <h2><%= post[i].title %></h2>
+                                    <p><%= post[i].description %></p>
+                                </div>
+                                <div class='cardUserInfo'>
+                                    <p><%= post[i].username.username %></p>
+                                    <p><%= post[i].date.toDateString() %></p>
+                                </div>
+                            </li>
+                        </a>
+                    <% } %>
+                    </ul>
+                </div>
+            </div>
+        <% } %> 
+    </body>
+</html>

@@ -17,7 +17,8 @@
                 <div class='yourList'>
                     <h1>Your Listings</h1>
                     <ul>
-                    <% for(let i = 0; i < post.length; i++) { console.log(post[i]) %>
+                    <%  if(post.length > 0) {
+                        for(let i = 0; i < post.length; i++) { console.log(post[i]) %>
                         <a class='categoryPostCard' href='/post/<%= post[i]._id%>'>
                             <li>
                                 <div class='categoryImage'>
@@ -33,7 +34,9 @@
                                 </div>
                             </li>
                         </a>
-                    <% } %>
+                    <% }} else { %>
+                        <li class='none'>You have no posts.</li>
+                        <% } %>
                     </ul>
                 </div>
             </div>

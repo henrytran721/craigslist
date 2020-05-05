@@ -25,6 +25,7 @@
                     <p class='phone_num'>Phone Contact: <%= post.username.phone_num %></p>
                     <% if(user.username === post.username.username) { %>
                     <a class='updateBtn' href='/update/<%= post._id %>'>Update</a>
+                    <a class='updateBtn' href='/delete/<%= post._id %>'>Delete</a>
                     <% } %>
                 </div>
             </div>

@@ -379,6 +379,33 @@ app.get('/yourlistings/:id', (req, res, next) => {
     )
 })
 
+app.get('/delete/:id', (req, res, next) => {
+    async.parallel({
+        posts: function(callback) {
+            Post.findById(req.params.id)
+                .populate('category')
+                .populate('username')
+                .exec(callback)
+        }
+    }, function(err, results) {
+        if(err) {
+            return next(err);
+        } else {
+            res.render('./views/delete_post.ejs', {user: req.user, posts: results.posts})
+        }
+    })
+})
+
+app.post('/delete/:id', (req, res, next) => {
+    Post.findByIdAndDelete(req.params.id, {}, function(err) {
+        if(err) {
+            return next(err);
+        } else {
+            res.redirect('/yourlistings/' + req.user._id)
+        }
+    })
+})
+
 app.listen(process.env.PORT || 3000, () => {
     console.log(`app is listening at port ${process.env.PORT}`);
 })

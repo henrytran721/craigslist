@@ -36,5 +36,8 @@
   "bugs": {
     "url": "https://github.com/henrytran721/craigslist/issues"
   },
-  "homepage": "https://github.com/henrytran721/craigslist#readme"
+  "homepage": "https://github.com/henrytran721/craigslist#readme",
+  "engines": {
+    "node": "v12.13.0"
+  }
 }

@@ -70,10 +70,14 @@
 
 
 .yourList {
+    h1 {
+        color: white;
+        font-family: $bebas;
+        text-align: center;
+    }
     ul {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
         padding: 0 3%;
         .categoryPostCard {
             background: white;
@@ -83,6 +87,7 @@
             height: 375px;
             width: 20%;
             border-radius: 4px;
+            margin: 0 3% 0 0;
             position: relative;
             box-shadow: 0 2px 20px 0 rgba(256,256,256, 0.40);
 
@@ -125,4 +130,11 @@
             }
         }
     }
+}
+
+.none {
+    color: white;
+    font-family: $bebas;
+    text-align: center;
+    list-style: none;
 }
